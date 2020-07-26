@@ -8,7 +8,7 @@ import (
 
 func main() {
 	if bd.ValidateConnection() == 0 {
-		log.Fatal("Sin conexión a la BD")
+		log.Fatal("No connection to DB")
 		return
 	}
 	handlers.Handlers()

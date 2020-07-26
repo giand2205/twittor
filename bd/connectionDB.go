@@ -21,7 +21,7 @@ func ConnectDB() *mongo.Client {
 		log.Fatal(err.Error())
 		return client
 	}
-	log.Println("Conexión exitosa con la BD")
+	log.Println("Successful connection to DB")
 	return client
 }
 
