@@ -22,7 +22,7 @@ func ValidateUser(email string) (models.User, bool, string) {
 	err := col.FindOne(ctx, condition).Decode(&result)
 	ID := result.ID.Hex()
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err.Error())
 		return result, false, ID
 	}
 

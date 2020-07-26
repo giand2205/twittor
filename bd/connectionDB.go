@@ -13,12 +13,12 @@ var clientOptions = options.Client().ApplyURI("mongodb+srv://gian:DFEN9YsemMZXA2
 func ConnectDB() *mongo.Client {
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
-		log.Fatal(err.Error())
+		log.Println(err.Error())
 		return client
 	}
 	err = client.Ping(context.TODO(), nil)
 	if err != nil {
-		log.Fatal(err.Error())
+		log.Println(err.Error())
 		return client
 	}
 	log.Println("Successful connection to DB")
@@ -28,7 +28,7 @@ func ConnectDB() *mongo.Client {
 func ValidateConnection() int {
 	err := MongoCN.Ping(context.TODO(), nil)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err.Error())
 		return 0
 	}
 	return 1

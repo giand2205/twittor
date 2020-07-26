@@ -18,7 +18,7 @@ func InsertRecord(u models.User) (string, bool, error) {
 
 	result, err := col.InsertOne(ctx, u)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err.Error())
 		return "", false, err
 	}
 	ObjID, _ := result.InsertedID.(primitive.ObjectID)
