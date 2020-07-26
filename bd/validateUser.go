@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-func ValidateUser(email string) (models.Usuario, bool, string) {
+func ValidateUser(email string) (models.User, bool, string) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
@@ -16,9 +16,9 @@ func ValidateUser(email string) (models.Usuario, bool, string) {
 
 	condition := bson.M{"email": email}
 
-	var result models.Usuario
+	var result models.User
 
-	err := col.FindOne(ctx, condition).Decode(&result)
+	err := col.FindOne(ctx, condition).Decode(result)
 	ID := result.ID.Hex()
 
 	if err != nil {

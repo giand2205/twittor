@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-func InsertRecord(u models.Usuario) (string, bool, error) {
+func InsertRecord(u models.User) (string, bool, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 	db := MongoCN.Database("twittor")

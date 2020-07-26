@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-type Usuario struct {
+type User struct {
 	ID        primitive.ObjectID `bson: "_id, omitempty" json:"id"`
 	Name      string             `bson: "name" json:"name, omitempty"`
 	LastName  string             `bson: "lastName" json:"lastName, omitempty"`
