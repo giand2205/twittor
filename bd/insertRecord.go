@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/giand2205/twittor/models"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"log"
 	"time"
 )
 
@@ -17,6 +18,7 @@ func InsertRecord(u models.User) (string, bool, error) {
 
 	result, err := col.InsertOne(ctx, u)
 	if err != nil {
+		log.Fatal(err)
 		return "", false, err
 	}
 	ObjID, _ := result.InsertedID.(primitive.ObjectID)

@@ -28,6 +28,7 @@ func ConnectDB() *mongo.Client {
 func ValidateConnection() int {
 	err := MongoCN.Ping(context.TODO(), nil)
 	if err != nil {
+		log.Fatal(err)
 		return 0
 	}
 	return 1

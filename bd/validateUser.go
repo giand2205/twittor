@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/giand2205/twittor/models"
 	"go.mongodb.org/mongo-driver/bson"
+	"log"
 	"time"
 )
 
@@ -18,10 +19,10 @@ func ValidateUser(email string) (models.User, bool, string) {
 
 	var result models.User
 
-	err := col.FindOne(ctx, condition).Decode(result)
+	err := col.FindOne(ctx, condition).Decode(&result)
 	ID := result.ID.Hex()
-
 	if err != nil {
+		log.Fatal(err)
 		return result, false, ID
 	}
 
