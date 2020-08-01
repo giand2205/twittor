@@ -13,7 +13,7 @@ func Register(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&t)
 	if err != nil {
 		log.Println(err.Error())
-		http.Error(w, "Error in the received data"+err.Error(), 400)
+		http.Error(w, "Error in the received data "+err.Error(), 400)
 		return
 	}
 	if len(t.Email) == 0 {
@@ -34,7 +34,7 @@ func Register(w http.ResponseWriter, r *http.Request) {
 	_, status, err := bd.InsertRecord(t)
 	if err != nil {
 		log.Println(err.Error())
-		http.Error(w, "An error occurred while trying to insert the record"+err.Error(), 400)
+		http.Error(w, "An error occurred while trying to insert the record "+err.Error(), 400)
 		return
 	}
 	if status == false {
