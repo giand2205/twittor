@@ -1,4 +1,4 @@
-package bd
+package db
 
 import (
 	"github.com/giand2205/twittor/models"
@@ -12,8 +12,8 @@ func TryLogin(email string, password string) (models.User, bool) {
 	}
 
 	passwordBytes := []byte(password)
-	passwordBD := []byte(user.Password)
-	err := bcrypt.CompareHashAndPassword(passwordBD, passwordBytes)
+	passwordDB := []byte(user.Password)
+	err := bcrypt.CompareHashAndPassword(passwordDB, passwordBytes)
 	if err != nil {
 		return user, false
 	}

@@ -1,4 +1,4 @@
-package bd
+package db
 
 import (
 	"context"
@@ -8,23 +8,23 @@ import (
 	"time"
 )
 
-func ValidateUser(email string) (models.User, bool, string) {
+func ConsultRelation(t models.Relation) (bool, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
-
 	db := MongoCN.Database("twittor")
-	col := db.Collection("users")
+	col := db.Collection("relation")
 
-	condition := bson.M{"email": email}
-
-	var result models.User
-
-	err := col.FindOne(ctx, condition).Decode(&result)
-	ID := result.ID.Hex()
-	if err != nil {
-		log.Println(err.Error())
-		return result, false, ID
+	condition := bson.M{
+		"userID":         t.UserID,
+		"userRelationID": t.UserRelationID,
 	}
 
-	return result, true, ID
+	var result models.Relation
+	log.Println(result)
+	err := col.FindOne(ctx, condition).Decode(&result)
+	if err != nil {
+		log.Println(err.Error())
+		return false, err
+	}
+	return true, nil
 }

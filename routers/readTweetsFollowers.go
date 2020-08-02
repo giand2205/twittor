@@ -7,26 +7,18 @@ import (
 	"strconv"
 )
 
-func ReadTweets(w http.ResponseWriter, r *http.Request) {
-	ID := r.URL.Query().Get("id")
-	if len(ID) < 1 {
-		http.Error(w, "You must send the ID parameter", http.StatusBadRequest)
-		return
-	}
+func ReadTweetsFollowers(w http.ResponseWriter, r *http.Request) {
 	if len(r.URL.Query().Get("page")) < 1 {
 		http.Error(w, "You must send the page parameter", http.StatusBadRequest)
 		return
 	}
-
 	page, err := strconv.Atoi(r.URL.Query().Get("page"))
-
 	if err != nil {
 		http.Error(w, "You must send only numbers greater than zero in the page parameter", http.StatusBadRequest)
 		return
 	}
 
-	pag := int64(page)
-	response, right := db.ReadTweets(ID, pag)
+	response, right := db.ReadTweetsFollowers(IDUser, page)
 	if right == false {
 		http.Error(w, "Error reading tweets", http.StatusBadRequest)
 		return

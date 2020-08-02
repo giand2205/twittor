@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"time"
-	"github.com/giand2205/twittor/bd"
+	"github.com/giand2205/twittor/db"
 	"github.com/giand2205/twittor/models"
 )
 
@@ -19,7 +19,7 @@ func SaveTweet(w http.ResponseWriter, r *http.Request){
 	}
 
 	var status bool
-	_, status, err = bd.InsertTweet(record)
+	_, status, err = db.InsertTweet(record)
 
 	if err != nil {
 		http.Error(w, "An error occurred while trying to insert the record. Try again "+err.Error(), 400)
@@ -30,5 +30,6 @@ func SaveTweet(w http.ResponseWriter, r *http.Request){
 		return
 	}
 
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 }

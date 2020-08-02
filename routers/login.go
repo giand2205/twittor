@@ -2,7 +2,7 @@ package routers
 
 import (
 	"encoding/json"
-	"github.com/giand2205/twittor/bd"
+	"github.com/giand2205/twittor/db"
 	"github.com/giand2205/twittor/jwt"
 	"github.com/giand2205/twittor/models"
 	"net/http"
@@ -24,7 +24,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	document, exist := bd.TryLogin(t.Email, t.Password)
+	document, exist := db.TryLogin(t.Email, t.Password)
 	if exist == false {
 		http.Error(w, "Invalid user or password", 400)
 		return

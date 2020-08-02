@@ -2,7 +2,7 @@ package routers
 
 import (
 	"encoding/json"
-	"github.com/giand2205/twittor/bd"
+	"github.com/giand2205/twittor/db"
 	"github.com/giand2205/twittor/models"
 	"net/http"
 )
@@ -17,7 +17,7 @@ func UpdateProfile(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var status bool
-	status, err = bd.UpdateRecord(t, IDUser)
+	status, err = db.UpdateRecord(t, IDUser)
 	if err != nil {
 		http.Error(w, "An error occurred while trying to modify the record. Try again "+err.Error(), 400)
 		return
@@ -27,5 +27,6 @@ func UpdateProfile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 }

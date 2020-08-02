@@ -3,7 +3,7 @@ package routers
 import (
 	"errors"
 	jwt "github.com/dgrijalva/jwt-go"
-	"github.com/giand2205/twittor/bd"
+	"github.com/giand2205/twittor/db"
 	"github.com/giand2205/twittor/models"
 	"strings"
 )
@@ -26,7 +26,7 @@ func ProcessToken(tk string) (*models.Claim, bool, string, error) {
 		return key, nil
 	})
 	if err == nil {
-		_, found, _ := bd.ValidateUser(claims.Email)
+		_, found, _ := db.ValidateUser(claims.Email)
 		if found == true {
 			Email = claims.Email
 			IDUser = claims.ID.Hex()

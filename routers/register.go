@@ -2,7 +2,7 @@ package routers
 
 import (
 	"encoding/json"
-	"github.com/giand2205/twittor/bd"
+	"github.com/giand2205/twittor/db"
 	"github.com/giand2205/twittor/models"
 	"log"
 	"net/http"
@@ -25,14 +25,14 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, found, _ := bd.ValidateUser(t.Email)
+	_, found, _ := db.ValidateUser(t.Email)
 	if found == true {
 		http.Error(w, "Email is already registered", 400)
 		return
 	}
 
 	var status bool
-	_, status, err = bd.InsertRecord(t)
+	_, status, err = db.InsertRecord(t)
 	if err != nil {
 		log.Println(err.Error())
 		http.Error(w, "An error occurred while trying to insert the record "+err.Error(), 400)
@@ -43,5 +43,6 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 }
