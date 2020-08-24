@@ -21,6 +21,7 @@ func UpdateRecord(u models.User, ID string) (bool, error) {
 	if len(u.LastName) > 0 {
 		record["lastName"] = u.LastName
 	}
+	record["birthday"] = u.Birthday
 	if len(u.Avatar) > 0 {
 		record["avatar"] = u.Avatar
 	}
