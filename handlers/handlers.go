@@ -7,6 +7,7 @@ import (
 	"github.com/rs/cors"
 	"log"
 	"net/http"
+	"os"
 )
 
 func Handlers() {
@@ -31,11 +32,11 @@ func Handlers() {
 	router.HandleFunc("/list-users", middlew.ValidateDB(middlew.ValidateJWT(routers.ListUsers))).Methods("GET")
 	router.HandleFunc("/read-tweets-followers", middlew.ValidateDB(middlew.ValidateJWT(routers.ReadTweetsFollowers))).Methods("GET")
 
-	/*PORT := os.Getenv("PORT")
+	PORT := os.Getenv("PORT")
 	if PORT == "" {
 		PORT = "8080"
-	}*/
+	}
 	handler := cors.AllowAll().Handler(router)
-	log.Fatal(http.ListenAndServe("", handler))
+	log.Println(http.ListenAndServe("", handler))
 
 }
