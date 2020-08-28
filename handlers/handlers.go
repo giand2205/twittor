@@ -7,7 +7,6 @@ import (
 	"github.com/rs/cors"
 	"log"
 	"net/http"
-	"os"
 )
 
 func Handlers() {
@@ -37,6 +36,6 @@ func Handlers() {
 		PORT = "8080"
 	}*/
 	handler := cors.AllowAll().Handler(router)
-	log.Fatal(http.ListenAndServe(":"+PORT, handler))
+	log.Fatal(http.ListenAndServe("", handler))
 
 }
