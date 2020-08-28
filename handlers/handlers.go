@@ -37,6 +37,6 @@ func Handlers() {
 		PORT = "8080"
 	}
 	handler := cors.AllowAll().Handler(router)
-	log.Println(http.ListenAndServe("", handler))
+	log.Fatal(http.ListenAndServe(":"+PORT, handler))
 
 }
